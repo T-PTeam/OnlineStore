@@ -2,6 +2,7 @@
 using OnlineStore.Core.Domain.Categories.Models;
 using OnlineStore.Core.Domain.Products.Models;
 using OnlineStore.Core.Domain.Users.Models;
+using OnlineStore.Persistence.OnlineStoreDb.EntityConfigurations;
 
 namespace OnlineStore.Persistence.OnlineStoreDb;
 
@@ -21,6 +22,8 @@ public class OnlineStoreDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.ApplyConfiguration(new ProductEntityConfigurations());
+        modelBuilder.ApplyConfiguration(new UserEntityConfigurations());
+        modelBuilder.ApplyConfiguration(new CategoryEntityConfigurations());
     }
 }
