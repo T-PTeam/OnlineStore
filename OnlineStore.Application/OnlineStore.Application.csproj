@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnlineStore.Application\OnlineStore.Application.csproj" />
     <ProjectReference Include="..\OnlineStore.Core\OnlineStore.Core.csproj" />
-    <ProjectReference Include="..\OnlineStore.Persistence\OnlineStore.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
