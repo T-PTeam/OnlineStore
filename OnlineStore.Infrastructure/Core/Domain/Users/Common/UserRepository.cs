@@ -31,4 +31,12 @@ public class UserRepository : IUserRepository
         if (userToBeRemoved is null) throw new InvalidOperationException();
         _onlineStoreDbContext.Users.Remove(userToBeRemoved);
     }
+
+    //TODO UpdateCommand
+    //public Task Update(User user)
+    //{
+    //    var userUpdate = _onlineStoreDbContext.Users.SingleOrDefault(x => x.Id == user.Id);
+    //    if(userUpdate is null) throw new InvalidOperationException();
+    //    _onlineStoreDbContext.Users.Update(userUpdate);
+    //}
 }

@@ -12,8 +12,8 @@ public class UnitOfWork : IUnitOfWork
         _onlineStoreDbContext = onlineStoreDbContext;
     }
 
-    public void SaveChanges()
+    public async Task SaveChangesAsync()
     {
-        _onlineStoreDbContext.SaveChanges();
+      await _onlineStoreDbContext.SaveChangesAsync();
     }
 }

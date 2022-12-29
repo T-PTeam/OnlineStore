@@ -2,5 +2,5 @@
 
 public interface ICreateProductCommand
 {
-    long CreateProduct(string name, string description, long categoryId, decimal price);
+   Task<long> CreateProduct(string name, string description, long categoryId, decimal price);
 }

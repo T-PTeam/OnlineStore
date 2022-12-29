@@ -16,11 +16,11 @@ public class CreateProductCommand : ICreateProductCommand
         _unitOfWork = unitOfWork;
     }
 
-    public long CreateProduct(string name, string description, long categoryId, decimal price)
+    public async Task<long> CreateProduct(string name, string description, long categoryId, decimal price)
     {
         var product = Product.Create(name, description, categoryId, price);
         _productRepository.Add(product);
-        _unitOfWork.SaveChanges();
+        await _unitOfWork.SaveChangesAsync();
         return product.Id;
     }
 }

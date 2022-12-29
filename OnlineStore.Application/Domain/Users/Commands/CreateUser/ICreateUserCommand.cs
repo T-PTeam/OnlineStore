@@ -2,5 +2,5 @@
 
 public interface ICreateUserCommand
 {
-    long CreateUser(string nickName, string numberPhone, string email, string password);
+    Task<long> CreateUser(string nickName, string numberPhone, string email, string password);
 }

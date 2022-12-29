@@ -29,4 +29,12 @@ public class User
     {
         return new User(nickName, email, numberPhone, password);
     }
+
+    //public void Update(User user)
+    //{
+    //    NickName = user.NickName;
+    //    NumberPhone = user.NumberPhone;
+    //    Email = user.Email;
+    //    Password = user.Password;
+    //}
 }

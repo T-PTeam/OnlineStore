@@ -2,5 +2,5 @@
 
 public interface ICreateCategoryCommand
 {
-    long CreateCategory(string name);
+    Task<long> CreateCategory(string name);
 }

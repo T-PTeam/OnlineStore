@@ -16,11 +16,11 @@ public class CreateCategoryCommand : ICreateCategoryCommand
         _unitOfWork = unitOfWork;
     }
 
-    public long CreateCategory(string name)
+    public async Task<long> CreateCategory(string name)
     {
         var category = Category.Create(name);
         _categoryRepository.Add(category);
-        _unitOfWork.SaveChanges();
+        await _unitOfWork.SaveChangesAsync();
         return category.Id;
     }
 }
