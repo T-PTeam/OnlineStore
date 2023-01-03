@@ -1,6 +1,8 @@
-﻿namespace OnlineStore.Application.Domain.Users.Commands.UpdateUser;
+﻿using OnlineStore.Core.Domain.Users.Models;
+
+namespace OnlineStore.Application.Domain.Users.Commands.UpdateUser;
 
 public interface IUpdateUserCommand
 {
-    Task UpdateUser(long id, string nickName, string numberPhone, string email, string password);
+    Task UpdateUser(User user);
 }

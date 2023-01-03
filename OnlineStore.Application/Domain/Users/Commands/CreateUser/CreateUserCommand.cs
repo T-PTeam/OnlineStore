@@ -19,7 +19,7 @@ public class CreateUserCommand : ICreateUserCommand
     public async Task<long> CreateUser(string nickName, string numberPhone, string email, string password)
     {
         var user = User.Create(nickName, numberPhone, email, password);
-        _userRepository.Add(user); 
+        await _userRepository.Add(user); 
         await _unitOfWork.SaveChangesAsync();
         return user.Id;
     }

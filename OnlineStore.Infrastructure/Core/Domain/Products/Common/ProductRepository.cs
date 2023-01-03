@@ -1,4 +1,5 @@
-﻿using OnlineStore.Core.Domain.Products.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineStore.Core.Domain.Products.Common;
 using OnlineStore.Core.Domain.Products.Models;
 using OnlineStore.Persistence.OnlineStoreDb;
 
@@ -13,21 +14,21 @@ public class ProductRepository : IProductRepository
         _onlineStoreDbContext = onlineStoreDbContext;
     }
 
-    public Product Find(long id)
+    public async Task<Product> Find(long id)
     {
-        var product = _onlineStoreDbContext.Products.SingleOrDefault(x => x.Id == id);
+        var product = await _onlineStoreDbContext.Products.SingleOrDefaultAsync(x => x.Id == id);
 
         return product ?? throw new InvalidOperationException();
     }
 
-    public void Add(Product product)
+    public async Task Add(Product product)
     {
-        _onlineStoreDbContext.Products.Add(product);
+        await _onlineStoreDbContext.Products.AddAsync(product);
     }
 
-    public void Delete(long id)
+    public async Task Delete(long id)
     {
-        var productToBeRemoved = _onlineStoreDbContext.Products.SingleOrDefault(x => x.Id == id);
+        var productToBeRemoved = await _onlineStoreDbContext.Products.SingleOrDefaultAsync(x => x.Id == id);
         if (productToBeRemoved is null) throw new InvalidOperationException();
         _onlineStoreDbContext.Products.Remove(productToBeRemoved);
     }

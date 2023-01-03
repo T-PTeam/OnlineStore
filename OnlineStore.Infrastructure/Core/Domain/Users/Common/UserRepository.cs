@@ -1,4 +1,5 @@
-﻿using OnlineStore.Core.Domain.Users.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineStore.Core.Domain.Users.Common;
 using OnlineStore.Core.Domain.Users.Models;
 using OnlineStore.Persistence.OnlineStoreDb;
 
@@ -13,30 +14,22 @@ public class UserRepository : IUserRepository
         _onlineStoreDbContext = onlineStoreDbContext;
     }
 
-    public User Find(long id)
+    public async Task<User> Find(long id)
     {
-        var user = _onlineStoreDbContext.Users.SingleOrDefault(x => x.Id == id);
+        var user = await _onlineStoreDbContext.Users.SingleOrDefaultAsync(x => x.Id == id);
 
         return user ?? throw new InvalidOperationException();
     }
 
-    public void Add(User user)
-    {
-        _onlineStoreDbContext.Users.Add(user);
+    public async Task Add(User user)
+    { 
+        await _onlineStoreDbContext.Users.AddAsync(user);
     }
 
-    public void Delete(long id)
+    public async Task Delete(long id)
     {
-        var userToBeRemoved = _onlineStoreDbContext.Users.SingleOrDefault(x => x.Id == id);
+        var userToBeRemoved = await _onlineStoreDbContext.Users.SingleOrDefaultAsync(x => x.Id == id);
         if (userToBeRemoved is null) throw new InvalidOperationException();
         _onlineStoreDbContext.Users.Remove(userToBeRemoved);
     }
-
-    //TODO UpdateCommand
-    //public Task Update(User user)
-    //{
-    //    var userUpdate = _onlineStoreDbContext.Users.SingleOrDefault(x => x.Id == user.Id);
-    //    if(userUpdate is null) throw new InvalidOperationException();
-    //    _onlineStoreDbContext.Users.Update(userUpdate);
-    //}
 }

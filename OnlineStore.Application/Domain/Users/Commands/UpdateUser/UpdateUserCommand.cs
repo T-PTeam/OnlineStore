@@ -1,5 +1,6 @@
 ﻿using OnlineStore.Core.Common;
 using OnlineStore.Core.Domain.Users.Common;
+using OnlineStore.Core.Domain.Users.Models;
 
 namespace OnlineStore.Application.Domain.Users.Commands.UpdateUser;
 
@@ -15,23 +16,11 @@ public class UpdateUserCommand : IUpdateUserCommand
         _unitOfWork = unitOfWork;
     }
 
-    public async Task UpdateUser(long id, string nickName, string numberPhone, string email, string password)
+    public async Task UpdateUser(User user)
     {
-        var user = _userRepository.Find(id);
-        user.NickName = nickName;
-        user.NumberPhone = numberPhone;
-        user.Email = email;
-        user.Password = password;
-        await _unitOfWork.SaveChangesAsync();
+        var original = await _userRepository.Find(user.Id);
+
+        original.Update(user);
+        await _unitOfWork.SaveChangesAsync().ConfigureAwait(false);
     }
-
-    //TODO UserUpdate
-    //public async Task UpdateUser(User user)
-    //{
-    //    var original = _userRepository.Find(user.Id);
-
-    //    original.Update(user);
-    //    _userRepository.Update(original);
-    //    await _unitOfWork.SaveChangesAsync();
-    //}
 }

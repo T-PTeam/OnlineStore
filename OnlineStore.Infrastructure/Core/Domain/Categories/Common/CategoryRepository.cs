@@ -1,4 +1,5 @@
-﻿using OnlineStore.Core.Domain.Categories.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineStore.Core.Domain.Categories.Common;
 using OnlineStore.Core.Domain.Categories.Models;
 using OnlineStore.Persistence.OnlineStoreDb;
 
@@ -13,22 +14,22 @@ public class CategoryRepository : ICategoryRepository
         _onlineStoreDbContext = onlineStoreDbContext;
     }
 
-    public Category Find(long id)
+    public async Task<Category> Find(long id)
     {
-        var category = _onlineStoreDbContext.Categories.SingleOrDefault(x => x.Id == id);
+        var category = await _onlineStoreDbContext.Categories.SingleOrDefaultAsync(x => x.Id == id);
 
         return category ?? throw new InvalidOperationException();
     }
 
-    public void Delete(long id)
+    public async Task Delete(long id)
     {
-        var categoryToBeRemoved = _onlineStoreDbContext.Categories.SingleOrDefault(x => x.Id == id);
+        var categoryToBeRemoved = await _onlineStoreDbContext.Categories.SingleOrDefaultAsync(x => x.Id == id);
         if(categoryToBeRemoved is null) throw new InvalidOperationException();
         _onlineStoreDbContext.Categories.Remove(categoryToBeRemoved);
     }
 
-    public void Add(Category category)
+    public async Task Add(Category category)
     {
-        _onlineStoreDbContext.Categories.Add(category);
+        await _onlineStoreDbContext.Categories.AddAsync(category);
     }
 }

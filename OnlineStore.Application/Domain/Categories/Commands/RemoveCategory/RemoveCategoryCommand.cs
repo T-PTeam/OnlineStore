@@ -17,7 +17,7 @@ public class RemoveCategoryCommand : IRemoveCategoryCommand
 
     public async Task RemoveCategory(long id)
     {
-        _categoryRepository.Delete(id);
+        await _categoryRepository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
     }
 }

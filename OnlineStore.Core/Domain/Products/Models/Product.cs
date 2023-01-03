@@ -33,4 +33,12 @@ public class Product
     {
         return new Product(name, description, categoryId, price);
     }
+
+    public void Update(Product product)
+    {
+        Name = product.Name;
+        Description = product.Description;
+        Price = product.Price;
+        CategoryId = product.CategoryId;
+    }
 }

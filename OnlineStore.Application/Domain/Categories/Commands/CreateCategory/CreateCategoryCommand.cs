@@ -19,7 +19,7 @@ public class CreateCategoryCommand : ICreateCategoryCommand
     public async Task<long> CreateCategory(string name)
     {
         var category = Category.Create(name);
-        _categoryRepository.Add(category);
+        await _categoryRepository.Add(category);
         await _unitOfWork.SaveChangesAsync();
         return category.Id;
     }

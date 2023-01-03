@@ -20,4 +20,9 @@ public class Category
     {
         return new Category(name);
     }
+
+    public void Update(Category category)
+    {
+        Name = category.Name;
+    }
 }

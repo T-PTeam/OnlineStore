@@ -18,7 +18,7 @@ public class RemoveUserCommand : IRemoveUserCommand
 
     public async Task RemoveUser(long id)
     {
-        _userRepository.Delete(id);
+        await _userRepository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
     }
 }

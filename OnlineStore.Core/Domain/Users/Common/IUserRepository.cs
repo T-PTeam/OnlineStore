@@ -4,11 +4,9 @@ namespace OnlineStore.Core.Domain.Users.Common;
 
 public interface IUserRepository
 {
-    User Find(long id);
+    Task<User> Find(long id);
 
-    void Add(User user);
+    Task Add(User user);
 
-    void Delete(long id);
-
-    //void Update(User user);
+    Task Delete(long id);
 }
