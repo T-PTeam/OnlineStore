@@ -19,7 +19,7 @@ public class CreateProductCommand : ICreateProductCommand
     public async Task<long> CreateProduct(string name, string description, long categoryId, decimal price)
     {
         var product = Product.Create(name, description, categoryId, price);
-        _productRepository.Add(product);
+        await _productRepository.Add(product);
         await _unitOfWork.SaveChangesAsync();
         return product.Id;
     }

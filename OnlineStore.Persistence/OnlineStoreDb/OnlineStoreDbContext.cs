@@ -16,7 +16,7 @@ public class OnlineStoreDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = @"Server=DESKTOP-K9TMIP8;Database=OnlineStore;Integrated Security=true";
+        var connectionString = @"Server=DESKTOP-AQOQTAN;Database=OnlineStore;Integrated Security=true";
         optionsBuilder.UseSqlServer(connectionString);
     }
 

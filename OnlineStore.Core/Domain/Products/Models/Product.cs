@@ -1,4 +1,5 @@
 ﻿using OnlineStore.Core.Domain.Categories.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineStore.Core.Domain.Products.Models;
 

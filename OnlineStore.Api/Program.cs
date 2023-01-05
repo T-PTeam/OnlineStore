@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using OnlineStore.Persistence.OnlineStoreDb;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<OnlineStoreDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DbConnection"]);
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
