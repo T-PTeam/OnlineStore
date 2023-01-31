@@ -1,5 +1,8 @@
-﻿using OnlineStore.Core.Domain.Categories.Models;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OnlineStore.Core.Domain.Categories.Models;
+using OnlineStore.Core.Domain.Products.Data;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineStore.Core.Domain.Products.Models;
 
@@ -10,17 +13,26 @@ public class Product
 
     }
 
-    private Product(string name, string description, long categoryId, decimal price)
+    private Product(string name, 
+        string slug, 
+        string description, 
+        long categoryId, 
+        decimal price, 
+        string image)
     {
         Name = name;
+        Slug = slug;
         Description = description;
         Price = price;
         CategoryId = categoryId;
+        Image = image;
     }
 
     public long Id { get; private set; }
 
     public string Name { get; set; }
+
+    public string Slug { get; set; }
 
     public string Description { get; set; }
 
@@ -28,18 +40,25 @@ public class Product
 
     public Category Category { get; set; }
 
+    [Required]
+    [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a value")]
+    [Column(TypeName = "decimal(8, 2)")]
     public decimal Price { get; set; }
 
-    public static Product Create(string name, string description, long categoryId, decimal price)
+    public string Image { get; set; }
+
+    public static Product Create(string name, string slug, string description, long categoryId, decimal price, string image)
     {
-        return new Product(name, description, categoryId, price);
+        return new Product(name, slug, description, categoryId, price, image);
     }
 
-    public void Update(Product product)
+    public void Update(ProductData product)
     {
         Name = product.Name;
+        Slug = product.Slug;
         Description = product.Description;
         Price = product.Price;
         CategoryId = product.CategoryId;
+        Image = product.Image;
     }
 }

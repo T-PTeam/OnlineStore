@@ -1,14 +1,22 @@
-﻿namespace OnlineStore.Application.Domain.Products.Queries.GetProducts;
+﻿using OnlineStore.Core.Domain.Categories.Models;
+
+namespace OnlineStore.Application.Domain.Products.Queries.GetProducts;
 
 public record ProductDto
 {
-    public long Id { get; set; }
+    public long Id { get; init; }
 
-    public string Name { get; set; }
+    public string Name { get; init; }
 
-    public string Description { get; set; }
+    public string Slug { get; init; }
 
-    public long CategoryId { get; set; }
+    public string Description { get; init; }
 
-    public decimal Price { get; set; }
+    public long CategoryId { get; init; }
+
+    public string CategoryName { get; init; }
+
+    public decimal Price { get; init; }
+
+    public string Image { get; init; }
 }
