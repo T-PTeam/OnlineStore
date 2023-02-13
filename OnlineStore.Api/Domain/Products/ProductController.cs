@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Api.Common;
 using OnlineStore.Api.Domain.Products.Request;
 using OnlineStore.Application.Domain.Products.Commands.CreateProduct;
+using OnlineStore.Application.Domain.Products.Commands.UpdateProduct;
 using OnlineStore.Application.Domain.Products.Queries.GetProducts;
 
 namespace OnlineStore.Api.Domain.Products;
@@ -29,9 +30,15 @@ public class ProductController : ControllerBase
     [HttpPost]
     public async Task<long> PostProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateProductCommand(request.Name, request.Slug, request.Description, request.CategoryId,
-            request.Price, request.Image);
+        var command = new CreateProductCommand(request.Name, request.Slug, request.Description, request.CategoryId, request.Price, request.Image);
         var id = await _mediator.Send(command, cancellationToken);
         return id;
+    }
+
+    [HttpPut]
+    public async Task PutProduct([FromBody] UpdateProductRequest request, CancellationToken cancellationToken)
+    {
+        var command = new UpdateProductCommand(request.Id, request.Name, request.Slug, request.Description, request.CategoryId, request.Price, request.Image);
+        await _mediator.Send(command, cancellationToken);
     }
 }
