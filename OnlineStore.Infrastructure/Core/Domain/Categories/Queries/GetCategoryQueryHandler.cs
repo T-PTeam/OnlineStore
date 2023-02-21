@@ -18,7 +18,7 @@ public class GetCategoryQueryHandler : IRequestHandler<GetCategoriesQuery, Categ
     {
         var sqlQuery = _dbContext.Categories.AsNoTracking();
         var skip = (request.PageNumber - 1) * request.PageSize;
-        var data = sqlQuery
+        var data = await sqlQuery
             .OrderBy(category => category.Id)
             .Include(x => x.Products)
             .Skip(skip)
@@ -40,6 +40,6 @@ public class GetCategoryQueryHandler : IRequestHandler<GetCategoriesQuery, Categ
                 }).ToList()
             }).ToArrayAsync(cancellationToken);
 
-        return await data;
+        return data;
     }
 }

@@ -5,7 +5,7 @@ using OnlineStore.Persistence.OnlineStoreDb;
 
 namespace OnlineStore.Infrastructure.Core.Domain.Products.Queries;
 
-public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto[]>
+public class GetProductQueryHandler : IRequestHandler<GetProductQuery, (ProductDto[] data, int total)>
 {
     private readonly OnlineStoreDbContext _dbContext;
 
@@ -14,16 +14,17 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDt
         _dbContext = dbContext;
     }
 
-    public async Task<ProductDto[]> Handle(GetProductQuery request, CancellationToken cancellationToken)
+    public async Task<(ProductDto[] data, int total)> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
         var sqlQuery = _dbContext.Products.AsNoTracking();
         var skip = (request.PageNumber - 1) * request.PageSize;
         var data = await sqlQuery
             .OrderByDescending(product => product.Id)
             .Include(product => product.Category)
+            .Where(s=> s.Category.Slug == request.CategorySlug || string.IsNullOrWhiteSpace(request.CategorySlug))
             .Skip(skip)
             .Take(request.PageSize)
-            .Select(product => new ProductDto()
+            .Select(product => new ProductDto
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -35,6 +36,11 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDt
                 Image = product.Image
             }).ToArrayAsync(cancellationToken);
 
-        return data;
+        var total = await sqlQuery
+            .OrderByDescending(product => product.Id)
+            .Include(product => product.Category)
+            .Where(s => s.Category.Slug == request.CategorySlug || string.IsNullOrWhiteSpace(request.CategorySlug))
+            .CountAsync(cancellationToken);
+        return (data, total);
     }
 }

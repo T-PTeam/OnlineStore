@@ -1,7 +1,22 @@
+using OnlineStore.Application;
+using OnlineStore.Infrastructure;
+using OnlineStore.Persistence;
+using OnlineStore.Web;
+using OnlineStore.Web.Clients;
+using OnlineStore.Web.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddInfrastructureRegistration();
+builder.Services.AddApplicationRegistration();
+builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddHttpClient<IOnlineStoreClient, OnlineStoreClient>((HttpClient httpClient, IServiceProvider provider) =>
+{
+    return new OnlineStoreClient("https://localhost:7023/", httpClient);
+});
 
 var app = builder.Build();
 
@@ -15,13 +30,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.UseHttpsRedirection();
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();

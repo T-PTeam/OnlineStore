@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Api", "OnlineStore.Api\OnlineStore.Api.csproj", "{149DE3FC-B0EE-45FB-B3E5-44ACA5B27C78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Web", "OnlineStore.Web\OnlineStore.Web.csproj", "{E6A62920-431C-4F63-9B55-9DF652715FB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{149DE3FC-B0EE-45FB-B3E5-44ACA5B27C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{149DE3FC-B0EE-45FB-B3E5-44ACA5B27C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{149DE3FC-B0EE-45FB-B3E5-44ACA5B27C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6A62920-431C-4F63-9B55-9DF652715FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6A62920-431C-4F63-9B55-9DF652715FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6A62920-431C-4F63-9B55-9DF652715FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6A62920-431C-4F63-9B55-9DF652715FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

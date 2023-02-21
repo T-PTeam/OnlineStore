@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OnlineStore.Core.Domain.Categories.Models;
+﻿using OnlineStore.Core.Domain.Categories.Models;
 using OnlineStore.Core.Domain.Products.Data;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace OnlineStore.Core.Domain.Products.Models;
 
@@ -40,14 +37,17 @@ public class Product
 
     public Category Category { get; set; }
 
-    [Required]
-    [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a value")]
-    [Column(TypeName = "decimal(8, 2)")]
     public decimal Price { get; set; }
 
     public string Image { get; set; }
 
-    public static Product Create(string name, string slug, string description, long categoryId, decimal price, string image)
+    public static Product Create(
+        string name, 
+        string slug, 
+        string description, 
+        long categoryId, 
+        decimal price, 
+        string image)
     {
         return new Product(name, slug, description, categoryId, price, image);
     }

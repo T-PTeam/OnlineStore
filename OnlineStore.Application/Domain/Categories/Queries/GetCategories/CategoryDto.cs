@@ -1,6 +1,4 @@
-﻿using OnlineStore.Application.Domain.Products.Queries.GetProducts;
-
-namespace OnlineStore.Application.Domain.Categories.Queries.GetCategories;
+﻿namespace OnlineStore.Application.Domain.Categories.Queries.GetCategories;
 
 public record CategoryDto
 {
