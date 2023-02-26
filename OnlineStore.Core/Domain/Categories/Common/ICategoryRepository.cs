@@ -4,9 +4,9 @@ namespace OnlineStore.Core.Domain.Categories.Common;
 
 public interface ICategoryRepository
 {
-    Task<Category> Find(long id);
+    Task<Category> FindAsync(long id);
 
-    Task Delete(long id);
+    Task DeleteAsync(long id);
 
-    Task Add(Category category);
+    Task AddAsync(Category category);
 }

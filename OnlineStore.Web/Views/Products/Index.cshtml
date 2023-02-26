@@ -1,0 +1,41 @@
+﻿@using OnlineStore.Web.Infrastructure.TagHelpers
+@model PaginationResponse_1OfProductDtoOf
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<div class="row">
+    @foreach (var item in Model.Data)
+    {
+        <div class="col-4">
+            <img src="/media/products/@item.Image" class="img-fluid" alt="" />
+            <h4>@item.Name </h4>
+            <div>
+                @Html.Raw(item.Description)
+            </div>
+            <p>
+                @item.Price.ToString("C2")
+            </p>
+            <p>
+                <a class="btn btn-primary" href="#">Add to cart</a>
+            </p>
+        </div>
+    }
+
+
+    @if ((int) Math.Ceiling((decimal) Model.Total / ViewBag.PageRange) > 1)
+    {
+        <div class="d-flex w-100 justify-content-center">
+            <pagination page-count="(int) Math.Ceiling((decimal) Model.Total / ViewBag.PageRange)"
+                        page-target="/products/@ViewBag.CategorySlug"
+                        page-number="@ViewBag.PageNumber"
+                        page-range="@ViewBag.PageRange">
+            </pagination>
+        </div>
+    }
+
+</div>
+

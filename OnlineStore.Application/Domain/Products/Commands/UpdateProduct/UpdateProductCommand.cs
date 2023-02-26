@@ -1,26 +1,5 @@
-﻿using OnlineStore.Core.Common;
-using OnlineStore.Core.Domain.Products.Common;
-using OnlineStore.Core.Domain.Products.Models;
+﻿using MediatR;
 
 namespace OnlineStore.Application.Domain.Products.Commands.UpdateProduct;
 
-public class UpdateProductCommand : IUpdateProductCommand
-{
-    private readonly IProductRepository _productRepository;
-
-    private readonly IUnitOfWork _unitOfWork;
-
-    public UpdateProductCommand(IProductRepository productRepository, IUnitOfWork unitOfWork)
-    {
-        _productRepository = productRepository;
-        _unitOfWork = unitOfWork;
-    }
-
-    public async Task UpdateProduct(Product product)
-    {
-        var original = await _productRepository.Find(product.Id);
-
-        original.Update(product);
-        await _unitOfWork.SaveChangesAsync();
-    }
-}
+public record UpdateProductCommand(long Id, string Name, string Slug, string Description, long CategoryId, decimal Price, string Image) : IRequest<Unit>;

@@ -14,21 +14,21 @@ public class CategoryRepository : ICategoryRepository
         _onlineStoreDbContext = onlineStoreDbContext;
     }
 
-    public async Task<Category> Find(long id)
+    public async Task<Category> FindAsync(long id)
     {
         var category = await _onlineStoreDbContext.Categories.SingleOrDefaultAsync(x => x.Id == id);
 
         return category ?? throw new InvalidOperationException();
     }
 
-    public async Task Delete(long id)
+    public async Task DeleteAsync(long id)
     {
         var categoryToBeRemoved = await _onlineStoreDbContext.Categories.SingleOrDefaultAsync(x => x.Id == id);
         if(categoryToBeRemoved is null) throw new InvalidOperationException();
         _onlineStoreDbContext.Categories.Remove(categoryToBeRemoved);
     }
 
-    public async Task Add(Category category)
+    public async Task AddAsync(Category category)
     {
         await _onlineStoreDbContext.Categories.AddAsync(category);
     }

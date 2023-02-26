@@ -4,9 +4,9 @@ namespace OnlineStore.Core.Domain.Products.Common;
 
 public interface IProductRepository
 {
-    Task<Product> Find(long id);
+    Task<Product> FindAsync(long id);
 
-    Task Add(Product product);
+    Task AddAsync(Product product);
 
-    Task Delete(long id);
+    Task DeleteAsync(long id);
 }
