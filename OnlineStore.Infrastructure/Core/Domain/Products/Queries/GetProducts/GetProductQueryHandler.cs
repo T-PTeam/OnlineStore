@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineStore.Application.Domain.Products.Queries.GetProducts;
 using OnlineStore.Persistence.OnlineStoreDb;
 
-namespace OnlineStore.Infrastructure.Core.Domain.Products.Queries;
+namespace OnlineStore.Infrastructure.Core.Domain.Products.Queries.GetProducts;
 
 public class GetProductQueryHandler : IRequestHandler<GetProductQuery, (ProductDto[] data, int total)>
 {
@@ -21,7 +21,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, (ProductD
         var data = await sqlQuery
             .OrderByDescending(product => product.Id)
             .Include(product => product.Category)
-            .Where(s=> s.Category.Slug == request.CategorySlug || string.IsNullOrWhiteSpace(request.CategorySlug))
+            .Where(s => s.Category.Slug == request.CategorySlug || string.IsNullOrWhiteSpace(request.CategorySlug))
             .Skip(skip)
             .Take(request.PageSize)
             .Select(product => new ProductDto

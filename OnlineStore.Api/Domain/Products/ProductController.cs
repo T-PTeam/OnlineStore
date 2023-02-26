@@ -7,6 +7,7 @@ using OnlineStore.Application.Domain.Products.Commands.CreateProduct;
 using OnlineStore.Application.Domain.Products.Commands.RemoveProduct;
 using OnlineStore.Application.Domain.Products.Commands.UpdateProduct;
 using OnlineStore.Application.Domain.Products.Queries.GetProducts;
+using OnlineStore.Application.Domain.Products.Queries.GetProductById;
 
 namespace OnlineStore.Api.Domain.Products;
 
@@ -29,6 +30,13 @@ public class ProductController : ControllerBase
         var query = new GetProductQuery(pageNumber, pageSize, categorySlug); 
         var response = await _mediator.Send(query, cancellationToken);
         return new PaginationResponse<ProductDto[]>(response.data, response.total);
+    }
+
+    [HttpGet("get-product-by-id")]
+    public async Task<ProductDetailsDto> GetProductByIdAsync(long id, CancellationToken cancellationToken)
+    {
+        var query = new GetProductByIdQuery(id);
+        return await _mediator.Send(query, cancellationToken);
     }
 
     [HttpPost]

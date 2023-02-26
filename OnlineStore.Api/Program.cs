@@ -1,6 +1,7 @@
 using OnlineStore.Application;
 using OnlineStore.Infrastructure;
 using OnlineStore.Persistence;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.EnableAnnotations();
+    options.CustomSchemaIds(type => type.ToString());
+
+    options.CustomOperationIds(apiDescription =>
+        apiDescription.TryGetMethodInfo(out var methodInfo)
+            ? methodInfo.Name
+            : null);
+});
 
 builder.Services.AddInfrastructureRegistration();
 builder.Services.AddApplicationRegistration();
@@ -21,7 +31,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(x => x.DisplayOperationId());
 }
 
 app.UseHttpsRedirection();

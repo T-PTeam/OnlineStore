@@ -13,5 +13,5 @@ public class CategoriesViewComponent : ViewComponent
     }
 
     public async Task<IViewComponentResult> InvokeAsync() =>
-        View(await _client.CategoriesAllAsync(1, Int32.MaxValue));
+        View(await _client.GetCategoryAsync(1, Int32.MaxValue));
 }

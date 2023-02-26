@@ -1,5 +1,5 @@
 ﻿@using OnlineStore.Web.Infrastructure.TagHelpers
-@model ProductDtoArrayPaginationResponse
+@model PaginationResponse_1OfProductDtoOf
 
 @{
     ViewData["Title"] = "Products";
@@ -12,7 +12,7 @@
     {
         <div class="col-4">
             <img src="/media/products/@item.Image" class="img-fluid" alt="" />
-            <h4>@item.Name</h4>
+            <h4>@item.Name </h4>
             <div>
                 @Html.Raw(item.Description)
             </div>
@@ -26,10 +26,10 @@
     }
 
 
-    @if (ViewBag.TotalPages > 1)
+    @if ((int) Math.Ceiling((decimal) Model.Total / ViewBag.PageRange) > 1)
     {
         <div class="d-flex w-100 justify-content-center">
-            <pagination page-count="@ViewBag.TotalPages"
+            <pagination page-count="(int) Math.Ceiling((decimal) Model.Total / ViewBag.PageRange)"
                         page-target="/products/@ViewBag.CategorySlug"
                         page-number="@ViewBag.PageNumber"
                         page-range="@ViewBag.PageRange">

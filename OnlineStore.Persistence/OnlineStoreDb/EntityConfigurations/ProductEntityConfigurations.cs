@@ -14,5 +14,6 @@ public class ProductEntityConfigurations : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasMaxLength(8)
             .HasColumnType("decimal(8, 2)");
+
     }
 }

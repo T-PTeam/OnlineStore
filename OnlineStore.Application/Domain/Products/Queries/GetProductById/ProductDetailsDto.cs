@@ -1,6 +1,6 @@
-﻿namespace OnlineStore.Application.Domain.Products.Queries.GetProducts;
+﻿namespace OnlineStore.Application.Domain.Products.Queries.GetProductById;
 
-public record ProductDto
+public record ProductDetailsDto
 {
     public long Id { get; init; }
 
