@@ -45,7 +45,7 @@ public class ProductsController : Controller
         await _client.PostProductAsync(request, cancellationToken);
         TempData["Success"] = "The product has been created!";
 
-        return View(new ProductDto());
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Edit(long id)
@@ -66,7 +66,7 @@ public class ProductsController : Controller
         await _client.PutProductAsync(request, cancellationToken);
         TempData["Success"] = "The product has been updated!";
 
-        return RedirectToAction("Edit");
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Delete(
