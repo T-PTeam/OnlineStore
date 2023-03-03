@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OnlineStore.Web.Areas.Admin.ViewsModels;
 using OnlineStore.Web.Clients;
+using System.Reflection;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers;
 
@@ -8,10 +10,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers;
 public class ProductsController : Controller
 {
     private readonly IOnlineStoreClient _client;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ProductsController(IOnlineStoreClient client)
+    public ProductsController(IOnlineStoreClient client, IWebHostEnvironment webHostEnvironment)
     {
         _client = client;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     public async Task<IActionResult> Index(
@@ -38,9 +42,24 @@ public class ProductsController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(
     CreateProductRequest request,
+    ProductViewModel model,
     CancellationToken cancellationToken)
     {
-        //TODO: Create find category by id
+        if (model.ImageUpload != null)
+        {
+            string uploadsDis = Path.Combine(_webHostEnvironment.WebRootPath, "media/products");
+            string imageName = Guid.NewGuid().ToString() + "_" + model.ImageUpload.FileName;
+
+            string filePath = Path.Combine(uploadsDis, imageName);
+
+            FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            await model.ImageUpload.CopyToAsync(fileStream, cancellationToken);
+            fileStream.Close();
+
+            request.Image = imageName;
+        }
+
+
         await _client.GetCategoryAsync(1, Int32.MaxValue, cancellationToken); 
         await _client.PostProductAsync(request, cancellationToken);
         TempData["Success"] = "The product has been created!";
@@ -60,8 +79,23 @@ public class ProductsController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(
         UpdateProductRequest request,
+        ProductViewModel model,
         CancellationToken cancellationToken)
     {
+        if (model.ImageUpload != null)
+        {
+            string uploadsDis = Path.Combine(_webHostEnvironment.WebRootPath, "media/products");
+            string imageName = Guid.NewGuid().ToString() + "_" + model.ImageUpload.FileName;
+
+            string filePath = Path.Combine(uploadsDis, imageName);
+
+            FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            await model.ImageUpload.CopyToAsync(fileStream, cancellationToken);
+            fileStream.Close();
+
+            request.Image = imageName;
+        }
+
         await _client.GetCategoryAsync(1, Int32.MaxValue, cancellationToken);
         await _client.PutProductAsync(request, cancellationToken);
         TempData["Success"] = "The product has been updated!";
@@ -75,6 +109,7 @@ public class ProductsController : Controller
     {
         await _client.RemoveProductAsync(request, cancellationToken);
         TempData["Success"] = "The product has been deleted!";
+
         return RedirectToAction("Index");
     }
 }
