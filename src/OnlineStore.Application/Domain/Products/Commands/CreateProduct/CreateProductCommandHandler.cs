@@ -9,16 +9,18 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
 {
     private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IProductPriceMustBePositiveChecker _productPriceMustBePositiveChecker;
 
-    public CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork)
+    public CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork, IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker)
     {
         _productRepository = productRepository;
         _unitOfWork = unitOfWork;
+        _productPriceMustBePositiveChecker = productPriceMustBePositiveChecker;
     }
 
     public async Task<long> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        var product = Product.Create(command.Name, command.Slug, command.Description, command.CategoryId, command.Price, command.Image);
+        var product = await Product.CreateAsync(command.Name, command.Slug, command.Description, command.CategoryId, command.Price, command.Image, _productPriceMustBePositiveChecker, cancellationToken);
         await _productRepository.AddAsync(product);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return product.Id;

@@ -18,13 +18,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Domain\Categories\Validators\" />
     <Folder Include="Domain\Categories\Rules\" />
-    <Folder Include="Domain\Products\Validators\" />
-    <Folder Include="Domain\Products\Rules\" />
   </ItemGroup>
 
 </Project>

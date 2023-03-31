@@ -1,16 +1,19 @@
-﻿using OnlineStore.Core.Domain.Categories.Models;
+﻿using OnlineStore.Core.Common;
+using OnlineStore.Core.Domain.Categories.Models;
+using OnlineStore.Core.Domain.Products.Common;
 using OnlineStore.Core.Domain.Products.Data;
+using OnlineStore.Core.Domain.Products.Validators;
 
 namespace OnlineStore.Core.Domain.Products.Models;
 
-public class Product
+public class Product : Entity
 {
     private Product()
     {
 
     }
 
-    private Product(string name, 
+    public Product(string name, 
         string slug, 
         string description, 
         long categoryId, 
@@ -41,15 +44,19 @@ public class Product
 
     public string Image { get; set; }
 
-    public static Product Create(
+    public static async Task<Product> CreateAsync(
         string name, 
         string slug, 
         string description, 
         long categoryId, 
         decimal price, 
-        string image)
+        string image,
+        IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker,
+        CancellationToken cancellationToken = default)
     {
-        return new Product(name, slug, description, categoryId, price, image);
+        var product = new Product(name, slug, description, categoryId, price, image);
+        await ValidateAsync(new CreateProductDataValidator(null, productPriceMustBePositiveChecker), product, cancellationToken);
+        return product;
     }
 
     public void Update(ProductData product)
