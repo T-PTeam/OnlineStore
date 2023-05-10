@@ -1,14 +1,15 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using OnlineStore.Core.Domain.Products.Common;
+using OnlineStore.Core.Domain.Products.Data;
 using OnlineStore.Core.Domain.Products.Models;
 using OnlineStore.Core.Domain.Products.Rules;
 
 namespace OnlineStore.Core.Domain.Products.Validators;
 
-public class CreateProductDataValidator : AbstractValidator<Product>
+public class UpdateProductDataValidator : AbstractValidator<ProductData>
 {
-    public CreateProductDataValidator(
+    public UpdateProductDataValidator(
         IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker)
     {
         RuleFor(x => x.Price)
@@ -22,7 +23,7 @@ public class CreateProductDataValidator : AbstractValidator<Product>
 
                 foreach (var error in checkResult.Errors)
                 {
-                    context.AddFailure(new ValidationFailure(nameof(Product.Price), error));
+                    context.AddFailure(new ValidationFailure(nameof(ProductData.Price), error));
                 }
             });
     }

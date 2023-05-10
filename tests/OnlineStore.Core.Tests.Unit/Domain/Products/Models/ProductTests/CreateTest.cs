@@ -2,7 +2,6 @@
 using Moq;
 using OnlineStore.Core.Domain.Products.Common;
 using OnlineStore.Core.Domain.Products.Models;
-using System;
 using OnlineStore.Core.Exceptions;
 
 namespace OnlineStore.Core.Tests.Unit.Domain.Products.Models.ProductTests;
@@ -27,7 +26,7 @@ public class CreateTest
         var price = 777.77m;
 
         //Act
-        var product = await Product.CreateAsync("Test", "test", "Decription", 1, price, "image.png", ProductPriceMustBePositiveChecker);
+        var product = await Product.CreateAsync("Test", "test", "Decription", 1, price, "image.png", ProductPriceMustBePositiveChecker, CancellationToken.None);
 
         //Assert 
         product.Should().NotBeNull();
@@ -45,7 +44,7 @@ public class CreateTest
         var price = 777.77m;
 
         //act
-        var action = async () => await Product.CreateAsync("Test", "test", "Decription", 1, price, "image.png", ProductPriceMustBePositiveChecker);
+        var action = async () => await Product.CreateAsync("Test", "test", "Decription", 1, price, "image.png", ProductPriceMustBePositiveChecker, CancellationToken.None);
 
 
         //assert

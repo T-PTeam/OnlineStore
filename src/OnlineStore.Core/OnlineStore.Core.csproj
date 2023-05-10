@@ -22,9 +22,4 @@
     <PackageReference Include="MediatR" Version="11.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\Categories\Validators\" />
-    <Folder Include="Domain\Categories\Rules\" />
-  </ItemGroup>
-
 </Project>

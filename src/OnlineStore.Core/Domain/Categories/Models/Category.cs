@@ -1,9 +1,12 @@
-﻿using OnlineStore.Core.Domain.Categories.Data;
+﻿using OnlineStore.Core.Common;
+using OnlineStore.Core.Domain.Categories.Common;
+using OnlineStore.Core.Domain.Categories.Data;
+using OnlineStore.Core.Domain.Categories.Validators;
 using OnlineStore.Core.Domain.Products.Models;
 
 namespace OnlineStore.Core.Domain.Categories.Models;
 
-public class Category
+public class Category : Entity
 {
     private Category()
     {
@@ -24,9 +27,15 @@ public class Category
 
     public IReadOnlyCollection<Product> Products { get; private set; }
 
-    public static Category Create(string name, string slug)
+    public static async Task<Category> CreateAsync(
+        string name, 
+        string slug,
+        ICategoryNameMustBeUniqueChecker categoryNameMustBeUniqueChecker,
+        CancellationToken cancellationToken = default)
     {
-        return new Category(name, slug);
+        var category = new Category(name,slug);
+        await ValidateAsync(new CreateCategoryDataValidator(null, categoryNameMustBeUniqueChecker), category, cancellationToken);
+        return category;
     }
 
     public void Update(CategoryData category)

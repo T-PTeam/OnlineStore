@@ -52,15 +52,20 @@ public class Product : Entity
         decimal price, 
         string image,
         IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var product = new Product(name, slug, description, categoryId, price, image);
-        await ValidateAsync(new CreateProductDataValidator(null, productPriceMustBePositiveChecker), product, cancellationToken);
+        await ValidateAsync(new CreateProductDataValidator(productPriceMustBePositiveChecker), product, cancellationToken);
         return product;
     }
 
-    public void Update(ProductData product)
+    public async Task UpdateAsync(
+        ProductData product,
+        IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker,
+        CancellationToken cancellationToken = default)
     {
+        await ValidateAsync(new UpdateProductDataValidator(productPriceMustBePositiveChecker), product, cancellationToken);
+
         Name = product.Name;
         Slug = product.Slug;
         Description = product.Description;
