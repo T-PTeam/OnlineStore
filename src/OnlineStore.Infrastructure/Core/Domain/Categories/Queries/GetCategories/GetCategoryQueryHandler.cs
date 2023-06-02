@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineStore.Application.Domain.Categories.Queries.GetCategories;
 using OnlineStore.Persistence.OnlineStoreDb;
 
-namespace OnlineStore.Infrastructure.Core.Domain.Categories.Queries;
+namespace OnlineStore.Infrastructure.Core.Domain.Categories.Queries.GetCategories;
 
 public class GetCategoryQueryHandler : IRequestHandler<GetCategoriesQuery, CategoryDto[]>
 {
