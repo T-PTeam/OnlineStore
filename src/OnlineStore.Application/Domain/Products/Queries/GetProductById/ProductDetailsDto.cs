@@ -1,4 +1,6 @@
-﻿namespace OnlineStore.Application.Domain.Products.Queries.GetProductById;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace OnlineStore.Application.Domain.Products.Queries.GetProductById;
 
 public record ProductDetailsDto
 {
@@ -17,4 +19,6 @@ public record ProductDetailsDto
     public decimal Price { get; init; }
 
     public string Image { get; init; }
+
+    public IFormFile ImageUpload { get; set; }
 }

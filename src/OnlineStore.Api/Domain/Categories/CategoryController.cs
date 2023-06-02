@@ -6,6 +6,7 @@ using OnlineStore.Application.Domain.Categories.Commands.CreateCategory;
 using OnlineStore.Application.Domain.Categories.Commands.RemoveCategory;
 using OnlineStore.Application.Domain.Categories.Commands.UpdateCategory;
 using OnlineStore.Application.Domain.Categories.Queries.GetCategories;
+using OnlineStore.Application.Domain.Categories.Queries.GetCategoryById;
 
 namespace OnlineStore.Api.Domain.Categories;
 
@@ -24,6 +25,13 @@ public class CategoryController : ControllerBase
     public async Task<CategoryDto[]> GetCategoryAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         var query = new GetCategoriesQuery(pageNumber, pageSize);
+        return await _mediator.Send(query, cancellationToken);
+    }
+
+    [HttpGet("get-category-by-id")]
+    public async Task<CategoryDetailsDto> GetCategoryByIdAsync(long id, CancellationToken cancellationToken)
+    {
+        var query = new GetCategoryByIdQuery(id);
         return await _mediator.Send(query, cancellationToken);
     }
 
