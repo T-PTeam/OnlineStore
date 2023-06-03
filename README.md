@@ -13,7 +13,7 @@ The following components must be installed for this project to work:
 
 1. Clone the repository with the following command:
   ```shell
-   git clone https://github.com/your/repository.git
+   git clone https://github.com/MrWoody666/OnlineStore.git
   ```
 
  2. Set up the MSSQL Server database. Change the database connection string in the appsettings.json file to match your configuration:
