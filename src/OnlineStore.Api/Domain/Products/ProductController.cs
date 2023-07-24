@@ -32,7 +32,7 @@ public class ProductController : ControllerBase
         return new PaginationResponse<ProductDto[]>(response.data, response.total);
     }
 
-    [HttpGet("get-product-by-id")]
+    [HttpGet("{id}")]
     public async Task<ProductDetailsDto> GetProductByIdAsync(long id, CancellationToken cancellationToken)
     {
         var query = new GetProductByIdQuery(id);

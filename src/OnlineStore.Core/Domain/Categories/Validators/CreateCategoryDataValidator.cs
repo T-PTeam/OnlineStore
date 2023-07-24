@@ -10,7 +10,8 @@ public class CreateCategoryDataValidator : AbstractValidator<Category>
 {
     public CreateCategoryDataValidator(
             Category? category,
-            ICategoryNameMustBeUniqueChecker categoryNameMustBeUniqueChecker)
+            ICategoryNameMustBeUniqueChecker categoryNameMustBeUniqueChecker,
+            ICategoryNameMustBeInputChecker categoryNameMustBeInputChecker)
     {
         RuleFor(x => x.Name)
             .NotNull()
@@ -24,6 +25,22 @@ public class CreateCategoryDataValidator : AbstractValidator<Category>
                 foreach (var error in check.Errors)
                 {
                     context.AddFailure(new ValidationFailure(nameof(Category.Name), error));
+                }
+            });
+
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .NotNull()
+            .CustomAsync(async (name, context, cancellationToken) =>
+            {
+                if(category != null && category.Name == string.Empty) return;
+                var check = await new CategoryNameMustBeInputRule(name, categoryNameMustBeInputChecker).CheckAsync(cancellationToken);
+
+                if(check.IsSuccess) return;
+
+                foreach (var error in check.Errors)
+                {
+                    context.AddFailure(new ValidationFailure(nameof(Category.Name),error));
                 }
             });
     }

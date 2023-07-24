@@ -31,10 +31,11 @@ public class Category : Entity
         string name, 
         string slug,
         ICategoryNameMustBeUniqueChecker categoryNameMustBeUniqueChecker,
+        ICategoryNameMustBeInputChecker categoryNameMustBeInputChecker,
         CancellationToken cancellationToken = default)
     {
         var category = new Category(name,slug);
-        await ValidateAsync(new CreateCategoryDataValidator(null, categoryNameMustBeUniqueChecker), category, cancellationToken);
+        await ValidateAsync(new CreateCategoryDataValidator(null, categoryNameMustBeUniqueChecker, categoryNameMustBeInputChecker), category, cancellationToken);
         return category;
     }
 

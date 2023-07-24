@@ -21,6 +21,16 @@ builder.Services.AddSwaggerGen(options =>
             : null);
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddInfrastructureRegistration();
 builder.Services.AddApplicationRegistration();
 builder.Services.AddPersistenceServices(builder.Configuration);
@@ -39,5 +49,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();

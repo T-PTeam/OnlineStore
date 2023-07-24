@@ -28,7 +28,7 @@ public class CategoryController : ControllerBase
         return await _mediator.Send(query, cancellationToken);
     }
 
-    [HttpGet("get-category-by-id")]
+    [HttpGet("{id}")]
     public async Task<CategoryDetailsDto> GetCategoryByIdAsync(long id, CancellationToken cancellationToken)
     {
         var query = new GetCategoryByIdQuery(id);

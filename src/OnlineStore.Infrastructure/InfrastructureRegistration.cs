@@ -25,5 +25,6 @@ public static class InfrastructureRegistration
         //Checkers
         service.AddScoped<IProductPriceMustBePositiveChecker, ProductPriceMustBePositiveChecker>();
         service.AddScoped<ICategoryNameMustBeUniqueChecker, CategoryNameMustBeUniqueChecker>();
+        service.AddScoped<ICategoryNameMustBeInputChecker, CategoryNameMustBeInputChecker>();
     }
 }
