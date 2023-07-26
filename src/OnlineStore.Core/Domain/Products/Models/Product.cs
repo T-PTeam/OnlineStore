@@ -13,7 +13,8 @@ public class Product : Entity
 
     }
 
-    public Product(string name, 
+    public Product(
+        string name, 
         string slug, 
         string description, 
         long categoryId, 
@@ -27,7 +28,7 @@ public class Product : Entity
         CategoryId = categoryId;
         Image = image;
     }
-
+    
     public long Id { get; private set; }
 
     public string Name { get; set; }

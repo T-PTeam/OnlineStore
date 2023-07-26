@@ -19,4 +19,8 @@
 	  <ProjectReference Include="..\OnlineStore.Infrastructure\OnlineStore.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\media\products\c7d51de5-58d3-4ff4-b052-99bb8426b4ea_20201224_000919-removebg-preview.png" />
+  </ItemGroup>
+
 </Project>

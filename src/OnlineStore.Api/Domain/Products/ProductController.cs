@@ -40,7 +40,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<long> PostProductAsync([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
+    public async Task<long> PostProductAsync([FromForm] CreateProductRequest request, CancellationToken cancellationToken)
     {
         var command = new CreateProductCommand(request.Name, request.Slug, request.Description, request.CategoryId, request.Price, request.Image);
         var id = await _mediator.Send(command, cancellationToken);
@@ -48,7 +48,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut]
-    public async Task PutProduct([FromBody] UpdateProductRequest request, CancellationToken cancellationToken)
+    public async Task PutProduct([FromForm] UpdateProductRequest request, CancellationToken cancellationToken)
     {
         var command = new UpdateProductCommand(request.Id, request.Name, request.Slug, request.Description, request.CategoryId, request.Price, request.Image);
         await _mediator.Send(command, cancellationToken);
