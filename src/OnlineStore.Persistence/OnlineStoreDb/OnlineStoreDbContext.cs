@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnlineStore.Core.Domain.Categories.Models;
 using OnlineStore.Core.Domain.Products.Models;
 using OnlineStore.Persistence.OnlineStoreDb.EntityConfigurations;
 
 namespace OnlineStore.Persistence.OnlineStoreDb;
 
-public class OnlineStoreDbContext : DbContext
+public class OnlineStoreDbContext : IdentityDbContext<IdentityUser<long>, IdentityRole<long>, long>
 {
     public OnlineStoreDbContext(DbContextOptions<OnlineStoreDbContext> options) : base(options)
     {
