@@ -37,6 +37,20 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = AuthOptions.ISSUER,
+        ValidAudience = AuthOptions.AUDIENCE,
+        IssuerSigningKey = AuthOptions.GetSecurityKey(),
+    };
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
