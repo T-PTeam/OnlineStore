@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{59621B33
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Core.Tests.Unit", "tests\OnlineStore.Core.Tests.Unit\OnlineStore.Core.Tests.Unit.csproj", "{9E360DB9-915E-46EF-9991-25407BAABBC4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{BBCBDD20-C6E7-4E6F-872D-B40D5D24F711}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.IdentityServer", "identity\OnlineStore.IdentityServer\OnlineStore.IdentityServer.csproj", "{2A65F72C-0151-4E9A-99BA-282A676CFD13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,10 @@ Global
 		{9E360DB9-915E-46EF-9991-25407BAABBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E360DB9-915E-46EF-9991-25407BAABBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E360DB9-915E-46EF-9991-25407BAABBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +75,7 @@ Global
 		{DFAC43B3-5EF2-4FDE-9A7D-B6623A08B0B9} = {027A7A59-6B13-4E7F-980E-CB87831261BB}
 		{A47996B9-9248-4DF3-8495-885960946390} = {027A7A59-6B13-4E7F-980E-CB87831261BB}
 		{9E360DB9-915E-46EF-9991-25407BAABBC4} = {59621B33-0073-4B2D-99DF-A08CF9EE9DA0}
+		{2A65F72C-0151-4E9A-99BA-282A676CFD13} = {BBCBDD20-C6E7-4E6F-872D-B40D5D24F711}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7154F791-CB72-47ED-8E68-E746B5E9F3BA}
