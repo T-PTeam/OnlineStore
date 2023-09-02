@@ -8,8 +8,8 @@ using OnlineStore.Persistence.OnlineStoreDb.EntityConfigurations;
 
 namespace OnlineStore.Persistence.OnlineStoreDb;
 
-public class OnlineStoreDbContext : IdentityDbContext<User, IdentityRole<long>, long>
-{
+public class OnlineStoreDbContext : DbContext
+{ 
     public OnlineStoreDbContext(DbContextOptions<OnlineStoreDbContext> options) : base(options)
     {
         
@@ -18,6 +18,7 @@ public class OnlineStoreDbContext : IdentityDbContext<User, IdentityRole<long>, 
     public DbSet<Product> Products { get; set; }
 
     public DbSet<Category> Categories { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -28,5 +29,6 @@ public class OnlineStoreDbContext : IdentityDbContext<User, IdentityRole<long>, 
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new ProductEntityConfigurations());
         modelBuilder.ApplyConfiguration(new CategoryEntityConfigurations());
+        modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
     }
 }

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using OnlineStore.Api.Domain.OAuth;
 using OnlineStore.Application;
 using OnlineStore.Infrastructure;
 using OnlineStore.Persistence;

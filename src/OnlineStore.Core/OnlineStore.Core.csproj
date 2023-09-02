@@ -22,4 +22,9 @@
     <PackageReference Include="MediatR" Version="11.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Users\Common\" />
+    <Folder Include="Domain\Users\Validators\" />
+  </ItemGroup>
+
 </Project>

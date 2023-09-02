@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Users\**" />
+    <Content Remove="Domain\Users\**" />
+    <EmbeddedResource Remove="Domain\Users\**" />
+    <None Remove="Domain\Users\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.16">
 		  <PrivateAssets>all</PrivateAssets>

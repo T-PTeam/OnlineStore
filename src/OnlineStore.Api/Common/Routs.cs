@@ -7,4 +7,5 @@ public static class Routs
     public const string Products = _api + "/products";
 
     public const string Categories = _api + "/categories";
+    public const string Auth = _api + "/auth";
 }
