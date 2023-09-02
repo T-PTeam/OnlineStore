@@ -4,6 +4,7 @@ using OnlineStore.Api.Domain.OAuth;
 using OnlineStore.Application;
 using OnlineStore.Infrastructure;
 using OnlineStore.Persistence;
+using OnlineStore.Persistence.OnlineStoreDb;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +38,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddInfrastructureRegistration();
 builder.Services.AddApplicationRegistration();
 builder.Services.AddPersistenceServices(builder.Configuration);
-
 var app = builder.Build();
 
 builder.Services.AddAuthorization();
@@ -53,6 +53,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = AuthOptions.GetSecurityKey(),
     };
 });
+var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<OnlineStoreDbContext>();
+SeedData.SeedDataBase(context);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
