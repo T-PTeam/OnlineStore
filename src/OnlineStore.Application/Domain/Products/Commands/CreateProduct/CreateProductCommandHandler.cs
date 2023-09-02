@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using OnlineStore.Core.Common;
 using OnlineStore.Core.Domain.Products.Common;
+using OnlineStore.Core.Domain.Products.Data;
 using OnlineStore.Core.Domain.Products.Models;
 
 namespace OnlineStore.Application.Domain.Products.Commands.CreateProduct;
@@ -11,17 +12,20 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IProductPriceMustBePositiveChecker _productPriceMustBePositiveChecker;
+    private readonly IProductNameMustBeInputChecker _productNameMustBeInputChecker;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
     public CreateProductCommandHandler(
         IProductRepository productRepository,
         IUnitOfWork unitOfWork,
         IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker,
+        IProductNameMustBeInputChecker productNameMustBeInputChecker,
         IWebHostEnvironment webHostEnvironment)
     {
         _productRepository = productRepository;
         _unitOfWork = unitOfWork;
         _productPriceMustBePositiveChecker = productPriceMustBePositiveChecker;
+        _productNameMustBeInputChecker = productNameMustBeInputChecker;
         _webHostEnvironment = webHostEnvironment;
     }
 
@@ -36,7 +40,8 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         await command.Image.CopyToAsync(fileStream, cancellationToken);
         fileStream.Close();
 
-        var product = await Product.CreateAsync(command.Name, command.Slug, command.Description, command.CategoryId, command.Price, imageName, _productPriceMustBePositiveChecker, cancellationToken);
+        var data = new ProductDataCreate(command.Name, command.Slug, command.Description, command.CategoryId, command.Price, imageName);
+        var product = await Product.CreateAsync(_productPriceMustBePositiveChecker, _productNameMustBeInputChecker, data, cancellationToken);
         await _productRepository.AddAsync(product);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return product.Id;

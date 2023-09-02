@@ -13,7 +13,7 @@ public class CreateCategoryDataValidator : AbstractValidator<Category>
             ICategoryNameMustBeUniqueChecker categoryNameMustBeUniqueChecker,
             ICategoryNameMustBeInputChecker categoryNameMustBeInputChecker)
     {
-        RuleFor(x => x.Name)
+        RuleFor(category => category.Name)
             .NotNull()
             .CustomAsync(async (name, context, cancellationToken) =>
             {
@@ -28,7 +28,7 @@ public class CreateCategoryDataValidator : AbstractValidator<Category>
                 }
             });
 
-        RuleFor(x => x.Name)
+        RuleFor(category => category.Name)
             .NotEmpty()
             .NotNull()
             .CustomAsync(async (name, context, cancellationToken) =>

@@ -25,10 +25,10 @@ public class UpdateTest
             .ReturnsAsync(true);
 
         var product = new Product("Pen", "pen", "description", 1, 777.00m, "image.png");
-        var data = new ProductData("IPhone 14 Pro", "iphone14pro", "Description", 2, 666.00m, "iphone14pro.png");
+        var data = new ProductDataUpdate("IPhone 14 Pro", "iphone14pro", "Description", 2, 666.00m, "iphone14pro.png");
         
         //Act
-        await product.UpdateAsync(data, ProductPriceMustBePositiveChecker);
+        await product.UpdateAsync(ProductPriceMustBePositiveChecker, data, CancellationToken.None);
 
         //Assert
         product.Should().NotBeNull();
@@ -44,10 +44,10 @@ public class UpdateTest
             .ReturnsAsync(false);
 
         var product = new Product("Pen", "pen", "description", 1, 777.00m, "image.png");
-        var data = new ProductData("IPhone 14 Pro", "iphone14pro", "Description", 2, 666.00m, "iphone14pro.png");
+        var data = new ProductDataUpdate("IPhone 14 Pro", "iphone14pro", "Description", 2, 666.00m, "iphone14pro.png");
 
         //Act
-        var action = async () => await product.UpdateAsync(data, ProductPriceMustBePositiveChecker);
+        var action = async () => await product.UpdateAsync(ProductPriceMustBePositiveChecker, data, CancellationToken.None);
 
         //Assert
         var validationException = action.Should()
@@ -56,7 +56,7 @@ public class UpdateTest
             .Result.Subject.Single();
 
         var failure = validationException.Failures.Single();
-        failure.PropertyName.Should().Be(nameof(ProductData.Price));
+        failure.PropertyName.Should().Be(nameof(ProductDataUpdate.Price));
         failure.ErrorMessage.Should().Be($"Product price: '{data.Price}' must be > 0.");
     }
 
@@ -72,13 +72,13 @@ public class UpdateTest
             .ReturnsAsync(true);
 
         var product = new Product("Pen", "pen", "description", 1, price, "image.png");
-        var data = new ProductData("IPhone 14 Pro", "iphone14pro", "Description", 2, updatePrice, "iphone14pro.png");
+        var data = new ProductDataUpdate("IPhone 14 Pro", "iphone14pro", "Description", 2, updatePrice, "iphone14pro.png");
 
         //Act
-        var action = async () => await product.UpdateAsync(data, ProductPriceMustBePositiveChecker);
+        var action = async () => await product.UpdateAsync(ProductPriceMustBePositiveChecker, data, CancellationToken.None);
 
         //Assert
-        await product.UpdateAsync(data, ProductPriceMustBePositiveChecker);
+        await product.UpdateAsync(ProductPriceMustBePositiveChecker, data, CancellationToken.None);
 
         //Assert
         product.Should().NotBeNull();

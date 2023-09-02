@@ -22,8 +22,11 @@ public static class InfrastructureRegistration
         service.AddScoped<IProductRepository, ProductRepository>();
         service.AddScoped<ICategoryRepository, CategoryRepository>();
 
-        //Checkers
+        //Products checkers
         service.AddScoped<IProductPriceMustBePositiveChecker, ProductPriceMustBePositiveChecker>();
+        service.AddScoped<IProductNameMustBeInputChecker, ProductNameMustBeInputChecker>();
+
+        //Categories checkers
         service.AddScoped<ICategoryNameMustBeUniqueChecker, CategoryNameMustBeUniqueChecker>();
         service.AddScoped<ICategoryNameMustBeInputChecker, CategoryNameMustBeInputChecker>();
     }

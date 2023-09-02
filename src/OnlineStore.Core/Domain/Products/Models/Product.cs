@@ -46,24 +46,20 @@ public class Product : Entity
     public string Image { get; set; }
 
     public static async Task<Product> CreateAsync(
-        string name, 
-        string slug, 
-        string description, 
-        long categoryId, 
-        decimal price, 
-        string image,
         IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker,
+        IProductNameMustBeInputChecker productNameMustBeInputChecker,
+        ProductDataCreate product,
         CancellationToken cancellationToken)
     {
-        var product = new Product(name, slug, description, categoryId, price, image);
-        await ValidateAsync(new CreateProductDataValidator(productPriceMustBePositiveChecker), product, cancellationToken);
-        return product;
-    }
+        await ValidateAsync(new CreateProductDataValidator(product, productPriceMustBePositiveChecker, productNameMustBeInputChecker), product, cancellationToken);
 
+        return new Product(product.Name, product.Slug, product.Description, product.CategoryId, product.Price, product.Image);
+    }
+    
     public async Task UpdateAsync(
-        ProductData product,
         IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker,
-        CancellationToken cancellationToken = default)
+        ProductDataUpdate product,
+        CancellationToken cancellationToken)
     {
         await ValidateAsync(new UpdateProductDataValidator(productPriceMustBePositiveChecker), product, cancellationToken);
 

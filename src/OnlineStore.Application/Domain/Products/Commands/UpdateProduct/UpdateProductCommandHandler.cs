@@ -38,8 +38,8 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
 
 
         var original = await _productRepository.FindAsync(command.Id);
-        var data = new ProductData(command.Name, command.Slug, command.Description, command.CategoryId, command.Price, imageName);
-        await original.UpdateAsync(data, _productPriceMustBePositiveChecker, cancellationToken);
+        var data = new ProductDataUpdate(command.Name, command.Slug, command.Description, command.CategoryId, command.Price, imageName);
+        await original.UpdateAsync(_productPriceMustBePositiveChecker, data, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }

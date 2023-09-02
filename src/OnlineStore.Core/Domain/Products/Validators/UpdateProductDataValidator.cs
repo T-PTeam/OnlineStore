@@ -7,7 +7,7 @@ using OnlineStore.Core.Domain.Products.Rules;
 
 namespace OnlineStore.Core.Domain.Products.Validators;
 
-public class UpdateProductDataValidator : AbstractValidator<ProductData>
+public class UpdateProductDataValidator : AbstractValidator<ProductDataUpdate>
 {
     public UpdateProductDataValidator(
         IProductPriceMustBePositiveChecker productPriceMustBePositiveChecker)
@@ -23,7 +23,7 @@ public class UpdateProductDataValidator : AbstractValidator<ProductData>
 
                 foreach (var error in checkResult.Errors)
                 {
-                    context.AddFailure(new ValidationFailure(nameof(ProductData.Price), error));
+                    context.AddFailure(new ValidationFailure(nameof(ProductDataUpdate.Price), error));
                 }
             });
     }
