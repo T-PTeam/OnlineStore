@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Api.Common;
 using OnlineStore.Api.Common.Responses;
@@ -24,6 +25,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<PaginationResponse<ProductDto[]>> GetProductAsync(int pageNumber, int pageSize, CancellationToken cancellationToken,
         string? categorySlug = "")
     {
