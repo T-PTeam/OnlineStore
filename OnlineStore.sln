@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{BB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.IdentityServer", "identity\OnlineStore.IdentityServer\OnlineStore.IdentityServer.csproj", "{2A65F72C-0151-4E9A-99BA-282A676CFD13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.IdentityServer.Persistence", "OnlineStore.IdentityServer.Persistance\OnlineStore.IdentityServer.Persistence.csproj", "{EF171113-D86B-4E2F-98AC-E0FC2FFE4756}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A65F72C-0151-4E9A-99BA-282A676CFD13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF171113-D86B-4E2F-98AC-E0FC2FFE4756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF171113-D86B-4E2F-98AC-E0FC2FFE4756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF171113-D86B-4E2F-98AC-E0FC2FFE4756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF171113-D86B-4E2F-98AC-E0FC2FFE4756}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{A47996B9-9248-4DF3-8495-885960946390} = {027A7A59-6B13-4E7F-980E-CB87831261BB}
 		{9E360DB9-915E-46EF-9991-25407BAABBC4} = {59621B33-0073-4B2D-99DF-A08CF9EE9DA0}
 		{2A65F72C-0151-4E9A-99BA-282A676CFD13} = {BBCBDD20-C6E7-4E6F-872D-B40D5D24F711}
+		{EF171113-D86B-4E2F-98AC-E0FC2FFE4756} = {BBCBDD20-C6E7-4E6F-872D-B40D5D24F711}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7154F791-CB72-47ED-8E68-E746B5E9F3BA}

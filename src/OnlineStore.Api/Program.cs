@@ -1,4 +1,3 @@
-using IdentityServer4.AccessTokenValidation;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineStore.Application;
@@ -76,9 +75,6 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("scope", "OnlineStoreApi");
     })
 );
-
-
-
 
 builder.Services.AddCors(options =>
 {
